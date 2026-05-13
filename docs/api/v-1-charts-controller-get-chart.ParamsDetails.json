@@ -1,0 +1,1 @@
+{"parameters":[{"name":"chartName","required":true,"in":"path","schema":{"example":"official_afrobeats_chart","type":"string"}},{"name":"territory","required":true,"in":"path","schema":{"example":"UK","type":"string"}},{"name":"limit","required":false,"in":"query","description":"Max 200","schema":{"type":"number"}}]}

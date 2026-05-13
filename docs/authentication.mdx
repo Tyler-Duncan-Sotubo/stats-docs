@@ -1,0 +1,32 @@
+# Authentication
+
+All API requests require an API key passed as a Bearer token in the `Authorization` header.
+
+## Getting a key
+
+Request your free API key at [developers.tooxclusive.com/docs/get-api-key](/docs/get-api-key).  
+Your key will be emailed to you instantly.
+
+## Making requests
+
+```bash
+curl https://api.tooxclusive.com/api/v1/artists/wizkid \
+  -H "Authorization: Bearer txc_live_YOUR_KEY_HERE"
+```
+
+## Alternative — query parameter
+
+For quick testing you can pass the key as a query parameter:
+
+```bash
+curl "https://api.tooxclusive.com/api/v1/artists/wizkid?api_key=txc_live_YOUR_KEY"
+```
+
+:::warning
+Never expose your API key in client-side code or public repositories.
+Use the query parameter method for testing only.
+:::
+
+## Key format
+
+All API keys follow this format:

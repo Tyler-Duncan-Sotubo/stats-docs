@@ -1,0 +1,32 @@
+/* src/css/custom.css */
+:root {
+  --ifm-color-primary: #f97316;
+  --ifm-color-primary-dark: #ea6c0a;
+  --ifm-color-primary-darker: #dd650a;
+  --ifm-color-primary-darkest: #b75308;
+  --ifm-color-primary-light: #fa8234;
+  --ifm-color-primary-lighter: #fa8b3f;
+  --ifm-color-primary-lightest: #fba567;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --ifm-color-primary: #f97316;
+  --ifm-color-primary-dark: #ea6c0a;
+  --ifm-color-primary-darker: #dd650a;
+  --ifm-color-primary-darkest: #b75308;
+  --ifm-color-primary-light: #fa8234;
+  --ifm-color-primary-lighter: #fa8b3f;
+  --ifm-color-primary-lightest: #fba567;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* API key form */
+.api-key-form {
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  padding: 24px;
+  margin: 24px 0;
+}

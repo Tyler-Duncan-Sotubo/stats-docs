@@ -1,0 +1,62 @@
+---
+sidebar_position: 7
+sidebar_label: Pagination
+---
+
+# Pagination
+
+All list endpoints support pagination via `page` and `limit` query parameters.
+
+## Parameters
+
+| Parameter | Type   | Default | Max | Description            |
+| --------- | ------ | ------- | --- | ---------------------- |
+| page      | number | 1       | —   | Page number, 1-indexed |
+| limit     | number | 20      | 100 | Results per page       |
+
+## Example
+
+```bash
+curl "https://api.tooxclusive.com/api/v1/artists?page=2&limit=50" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+```
+
+## Response shape
+
+Every paginated endpoint returns a `data` array and a `meta` object:
+
+```json
+{
+  "data": [],
+  "meta": {
+    "total": 20000,
+    "page": 2,
+    "limit": 50,
+    "totalPages": 400
+  }
+}
+```
+
+| Field      | Description                                |
+| ---------- | ------------------------------------------ |
+| total      | Total number of records matching the query |
+| page       | Current page                               |
+| limit      | Results per page                           |
+| totalPages | Total number of pages                      |
+
+## Paginated endpoints
+
+These endpoints support pagination:
+
+- `GET /v1/artists`
+- `GET /v1/songs`
+- `GET /v1/albums`
+- `GET /v1/milestones/recent`
+- `GET /v1/milestones/artists/:tier`
+- `GET /v1/milestones/songs/:tier`
+
+## Tips
+
+- Start with a higher `limit` (50-100) to reduce the number of requests
+- Use `meta.totalPages` to know when you have fetched all pages
+- Cache paginated results — data updates once daily

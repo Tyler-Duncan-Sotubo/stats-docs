@@ -1,0 +1,1 @@
+{"parameters":[{"name":"limit","required":false,"in":"query","description":"Max 100","schema":{"type":"number"}},{"name":"isAfrobeats","required":false,"in":"query","schema":{"type":"boolean"}},{"name":"country","required":false,"in":"query","description":"ISO country code","schema":{"type":"string"}}]}

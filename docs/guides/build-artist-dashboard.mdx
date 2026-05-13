@@ -1,0 +1,124 @@
+---
+sidebar_position: 1
+sidebar_label: Build an Artist Dashboard
+---
+
+# Build an Artist Dashboard
+
+This guide walks through combining multiple endpoints to build a complete artist dashboard — the same data powering [TooXclusive Stats](https://tooxclusive.com/stats).
+
+## What we are building
+
+A dashboard showing:
+
+- Artist profile — name, image, origin, streams, listeners
+- 90-day stream history chart
+- Milestone timeline
+- Top songs
+
+## Step 1 — Fetch the artist profile
+
+```javascript
+const BASE = "https://api.tooxclusive.com/api";
+const KEY = "txc_live_YOUR_KEY";
+const headers = { Authorization: `Bearer ${KEY}` };
+
+const artist = await fetch(`${BASE}/v1/artists/wizkid`, { headers }).then((r) =>
+  r.json(),
+);
+
+console.log(artist.name); // Wizkid
+console.log(artist.totalStreams); // 12500000000
+console.log(artist.monthlyListeners); // 44000000
+```
+
+## Step 2 — Fetch stream history
+
+```javascript
+const history = await fetch(`${BASE}/v1/artists/wizkid/history`, {
+  headers,
+}).then((r) => r.json());
+
+// history is an array of daily snapshots
+// [{ date, totalStreams, dailyStreams, dailyGrowth, growth7d }, ...]
+```
+
+## Step 3 — Fetch milestone timeline
+
+```javascript
+const milestones = await fetch(`${BASE}/v1/milestones/timeline/wizkid`, {
+  headers,
+}).then((r) => r.json());
+
+// [{ metric, threshold, crossedAt, streamValue }, ...]
+```
+
+## Step 4 — Combine in parallel
+
+```javascript
+const [artist, history, milestones] = await Promise.all([
+  fetch(`${BASE}/v1/artists/wizkid`, { headers }).then((r) => r.json()),
+  fetch(`${BASE}/v1/artists/wizkid/history`, { headers }).then((r) => r.json()),
+  fetch(`${BASE}/v1/milestones/timeline/wizkid`, { headers }).then((r) =>
+    r.json(),
+  ),
+]);
+```
+
+## Step 5 — Render
+
+```jsx
+function ArtistDashboard({ artist, history, milestones }) {
+  return (
+    <div>
+      <img src={artist.imageUrl} alt={artist.name} />
+      <h1>{artist.name}</h1>
+      <p>{formatNumber(artist.totalStreams)} total streams</p>
+      <p>{formatNumber(artist.monthlyListeners)} monthly listeners</p>
+
+      <StreamChart data={history} />
+
+      <h2>Milestones</h2>
+      {milestones.map((m) => (
+        <div key={m.threshold}>
+          {formatNumber(m.threshold)} streams — {m.crossedAt}
+        </div>
+      ))}
+
+      <h2>Top Songs</h2>
+      {artist.topSongs.map((song) => (
+        <div key={song.id}>
+          {song.title} — {formatNumber(song.totalStreams)} streams
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+## Full example
+
+```javascript
+const BASE = "https://api.tooxclusive.com/api";
+const KEY = "txc_live_YOUR_KEY";
+const headers = { Authorization: `Bearer ${KEY}` };
+
+async function getArtistDashboard(slug) {
+  const [artist, history, milestones] = await Promise.all([
+    fetch(`${BASE}/v1/artists/${slug}`, { headers }).then((r) => r.json()),
+    fetch(`${BASE}/v1/artists/${slug}/history`, { headers }).then((r) =>
+      r.json(),
+    ),
+    fetch(`${BASE}/v1/milestones/timeline/${slug}`, { headers }).then((r) =>
+      r.json(),
+    ),
+  ]);
+
+  return { artist, history, milestones };
+}
+
+const dashboard = await getArtistDashboard("wizkid");
+console.log(dashboard.artist.name);
+console.log(dashboard.history.length, "days of data");
+console.log(dashboard.milestones.length, "milestones crossed");
+```

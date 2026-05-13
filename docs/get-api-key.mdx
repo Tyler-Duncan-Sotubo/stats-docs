@@ -1,0 +1,49 @@
+# Get an API Key
+
+## Request your free key
+
+Fill out the form below and your API key will be emailed to you instantly.
+
+<div className="api-key-form">
+
+**Name** — your name or your app's name  
+**Email** — where we'll send your key  
+**Website** — optional, your app or project URL
+
+<a
+  href="mailto:api@tooxclusive.com?subject=API Key Request&body=Name: %0AEmail: %0AWebsite: %0AIntended use: "
+  className="button button--primary button--lg"
+>
+  Request API Key →
+</a>
+
+</div>
+
+:::info
+Free tier includes 1,000 requests per day. Need more? Email api@tooxclusive.com.
+:::
+
+## What happens next
+
+1. You'll receive an email with your key within minutes
+2. Your key looks like: `txc_live_abc123...`
+3. Pass it as `Authorization: Bearer txc_live_...` on every request
+4. Your key is shown **once** — store it somewhere safe
+
+## Example first request
+
+Once you have your key:
+
+```bash
+# Get Wizkid's stats
+curl https://api.tooxclusive.com/api/v1/artists/wizkid \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+
+# Get recent Afrobeats milestones
+curl "https://api.tooxclusive.com/api/v1/milestones/recent?isAfrobeats=true&limit=10" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+
+# Top 10 Afrobeats artists by streams
+curl "https://api.tooxclusive.com/api/v1/leaderboard/streams?isAfrobeats=true&limit=10" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+```

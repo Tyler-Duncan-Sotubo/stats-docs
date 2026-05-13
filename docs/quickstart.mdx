@@ -1,0 +1,115 @@
+---
+sidebar_position: 2
+sidebar_label: Quickstart
+---
+
+# Quickstart
+
+Get from zero to your first API response in under 2 minutes.
+
+## 1. Get your demo key
+
+Use this key to test immediately — no signup required:
+
+```
+txc_live_3dc60c18580d20075706a1b45084bff6dd969d8fcd49cb42b5e7b5b39a65739f
+```
+
+:::info
+The demo key is limited to 50 requests/day. [Get your own free key](/get-api-key) for 1,000/day.
+:::
+
+## 2. Make your first request
+
+**curl**
+
+```bash
+curl https://api.tooxclusive.com/api/v1/artists/wizkid \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+```
+
+**JavaScript**
+
+```javascript
+const response = await fetch(
+  "https://api.tooxclusive.com/api/v1/artists/wizkid",
+  {
+    headers: {
+      Authorization: "Bearer txc_live_YOUR_KEY",
+    },
+  },
+);
+const artist = await response.json();
+console.log(artist.name, artist.totalStreams);
+```
+
+**Python**
+
+```python
+import requests
+
+headers = {'Authorization': 'Bearer txc_live_YOUR_KEY'}
+
+response = requests.get(
+  'https://api.tooxclusive.com/api/v1/artists/wizkid',
+  headers=headers
+)
+
+artist = response.json()
+print(artist['name'], artist['totalStreams'])
+```
+
+## 3. Explore the response
+
+```json
+{
+  "id": "...",
+  "name": "Wizkid",
+  "slug": "wizkid",
+  "imageUrl": "https://...",
+  "originCountry": "NG",
+  "isAfrobeats": true,
+  "totalStreams": 12500000000,
+  "dailyStreams": 4200000,
+  "monthlyListeners": 44000000,
+  "topSongs": [],
+  "charts": [],
+  "awards": []
+}
+```
+
+## 4. Try more endpoints
+
+**Recent Afrobeats milestones**
+
+```bash
+curl "https://api.tooxclusive.com/api/v1/milestones/recent?isAfrobeats=true&limit=10" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+```
+
+**Top 10 Afrobeats artists by streams**
+
+```bash
+curl "https://api.tooxclusive.com/api/v1/leaderboard/streams?isAfrobeats=true&limit=10" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+```
+
+**Official Afrobeats Chart UK**
+
+```bash
+curl "https://api.tooxclusive.com/api/v1/charts/official_afrobeats_chart/UK" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+```
+
+**Trending artists**
+
+```bash
+curl "https://api.tooxclusive.com/api/v1/trending/artists?isAfrobeats=true" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+```
+
+## Next steps
+
+- [Authentication](/docs/authentication) — learn about API keys and security
+- [Rate Limits](/docs/rate-limits) — understand usage limits
+- [API Reference](/docs/category/api-reference) — full endpoint documentation

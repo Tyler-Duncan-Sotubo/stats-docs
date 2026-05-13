@@ -1,0 +1,1 @@
+{"parameters":[{"name":"artistSlug","required":true,"in":"path","schema":{"example":"wizkid","type":"string"}},{"name":"threshold","required":true,"in":"path","schema":{"example":10000000000,"type":"string"}}]}

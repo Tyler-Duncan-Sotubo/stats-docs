@@ -1,0 +1,1 @@
+{"parameters":[{"name":"tier","required":true,"in":"path","description":"e.g. 50m, 100m, 500m, 1b, 2b","schema":{"example":"1b","type":"string"}},{"name":"page","required":false,"in":"query","schema":{"type":"number"}},{"name":"limit","required":false,"in":"query","schema":{"type":"number"}}]}

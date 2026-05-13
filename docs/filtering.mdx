@@ -1,0 +1,120 @@
+---
+sidebar_position: 8
+sidebar_label: Filtering
+---
+
+# Filtering
+
+Most endpoints support filtering via query parameters.
+
+## isAfrobeats
+
+Filter results to Afrobeats artists and songs only.
+
+```bash
+# Afrobeats artists only
+curl "https://api.tooxclusive.com/api/v1/artists?isAfrobeats=true" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+
+# All artists including global
+curl "https://api.tooxclusive.com/api/v1/artists?isAfrobeats=false" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+
+# No filter — returns everything
+curl "https://api.tooxclusive.com/api/v1/artists" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+```
+
+## country
+
+Filter artists by origin country using ISO 3166-1 alpha-2 country codes.
+
+```bash
+# Nigerian artists
+curl "https://api.tooxclusive.com/api/v1/artists?country=NG" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+
+# Ghanaian artists
+curl "https://api.tooxclusive.com/api/v1/artists?country=GH" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+```
+
+Common country codes:
+
+| Code | Country        |
+| ---- | -------------- |
+| NG   | Nigeria        |
+| GH   | Ghana          |
+| ZA   | South Africa   |
+| KE   | Kenya          |
+| TZ   | Tanzania       |
+| US   | United States  |
+| GB   | United Kingdom |
+
+## search / q
+
+Search artists or songs by name.
+
+```bash
+# Search artists
+curl "https://api.tooxclusive.com/api/v1/artists?q=burna" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+
+# Search songs by title
+curl "https://api.tooxclusive.com/api/v1/songs/search?title=essence" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+
+# Search songs by title and artist
+curl "https://api.tooxclusive.com/api/v1/songs/search?title=essence&artistName=wizkid" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+```
+
+## sortBy
+
+Control the sort order of results.
+
+**Artists**
+
+```bash
+# Sort by total streams (default)
+curl "https://api.tooxclusive.com/api/v1/artists?sortBy=totalStreams" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+
+# Sort by monthly listeners
+curl "https://api.tooxclusive.com/api/v1/artists?sortBy=monthlyListeners" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+
+# Sort alphabetically
+curl "https://api.tooxclusive.com/api/v1/artists?sortBy=name" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+```
+
+**Albums**
+
+```bash
+# Sort by total streams (default)
+curl "https://api.tooxclusive.com/api/v1/albums?sortBy=totalStreams" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+
+# Sort by release date
+curl "https://api.tooxclusive.com/api/v1/albums?sortBy=releaseDate" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+
+# Sort by daily streams
+curl "https://api.tooxclusive.com/api/v1/albums?sortBy=dailyStreams" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+```
+
+## Combining filters
+
+Filters can be combined freely:
+
+```bash
+# Top 10 Nigerian Afrobeats artists by streams
+curl "https://api.tooxclusive.com/api/v1/artists?isAfrobeats=true&country=NG&limit=10" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+
+# Afrobeats albums sorted by release date page 2
+curl "https://api.tooxclusive.com/api/v1/albums?isAfrobeats=true&sortBy=releaseDate&page=2" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+```

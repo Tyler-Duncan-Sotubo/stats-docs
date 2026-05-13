@@ -1,0 +1,124 @@
+---
+sidebar_position: 3
+sidebar_label: Afrobeats Charts
+---
+
+# Afrobeats Charts
+
+This guide covers how to fetch and display chart data — including the Official Afrobeats Chart UK.
+
+## Available charts
+
+```bash
+curl "https://api.tooxclusive.com/api/v1/charts" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+```
+
+Returns all available charts with their latest week and total entries.
+
+## Fetch the Official Afrobeats Chart
+
+```bash
+curl "https://api.tooxclusive.com/api/v1/charts/official_afrobeats_chart/UK" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+```
+
+Response:
+
+```json
+{
+  "chartName": "official_afrobeats_chart",
+  "chartTerritory": "UK",
+  "chartWeek": "2026-05-10",
+  "data": [
+    {
+      "position": 1,
+      "songTitle": "...",
+      "artistName": "...",
+      "peakPosition": 1,
+      "weeksOnChart": 12,
+      "trend": "UP",
+      "delta": 2,
+      "prevRank": 3
+    }
+  ],
+  "meta": { "total": 100 }
+}
+```
+
+## Trend values
+
+| Value | Meaning                     |
+| ----- | --------------------------- |
+| NEW   | First appearance on chart   |
+| UP    | Moved up from last week     |
+| DOWN  | Moved down from last week   |
+| SAME  | Same position as last week  |
+| RE    | Re-entry after dropping off |
+
+## Build a chart display
+
+```javascript
+const BASE = "https://api.tooxclusive.com/api";
+const KEY = "txc_live_YOUR_KEY";
+const headers = { Authorization: `Bearer ${KEY}` };
+
+const chart = await fetch(`${BASE}/v1/charts/official_afrobeats_chart/UK`, {
+  headers,
+}).then((r) => r.json());
+
+function trendIcon(trend) {
+  switch (trend) {
+    case "UP":
+      return "▲";
+    case "DOWN":
+      return "▼";
+    case "NEW":
+      return "NEW";
+    case "RE":
+      return "RE";
+    default:
+      return "—";
+  }
+}
+
+chart.data.forEach((entry) => {
+  console.log(
+    `${entry.position}. ${entry.songTitle} — ${entry.artistName} ${trendIcon(entry.trend)}`,
+  );
+});
+```
+
+## Available chart names
+
+| Chart name               | Territory | Description                       |
+| ------------------------ | --------- | --------------------------------- |
+| official_afrobeats_chart | UK        | Official Afrobeats Chart UK       |
+| spotify_daily_ng         | NG        | Spotify Daily Top 50 Nigeria      |
+| apple_daily_ng           | NG        | Apple Music Daily Top 100 Nigeria |
+
+:::tip
+Use `GET /v1/charts` to get the full list of available charts and territories dynamically.
+:::
+
+## Filter by territory
+
+Some charts are available in multiple territories. Pass the territory as the second path parameter:
+
+```bash
+# Nigeria
+curl "https://api.tooxclusive.com/api/v1/charts/spotify_daily_ng/NG" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+
+# UK Afrobeats
+curl "https://api.tooxclusive.com/api/v1/charts/official_afrobeats_chart/UK" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+```
+
+## Limit results
+
+```bash
+# Top 10 only
+curl "https://api.tooxclusive.com/api/v1/charts/official_afrobeats_chart/UK?limit=10" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+```

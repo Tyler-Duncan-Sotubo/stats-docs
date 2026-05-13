@@ -1,0 +1,115 @@
+---
+sidebar_position: 2
+sidebar_label: Track Milestones
+---
+
+# Track Milestones
+
+This guide shows how to poll the milestones endpoint and build a notification system for when artists cross streaming thresholds.
+
+## What are milestones
+
+A milestone is recorded every time an artist or song crosses a streaming threshold — 100M, 500M, 1B, 5B, 10B streams and beyond. There are 90,000+ milestones tracked.
+
+## Fetch recent milestones
+
+```bash
+curl "https://api.tooxclusive.com/api/v1/milestones/recent?isAfrobeats=true&limit=10" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+```
+
+Response:
+
+```json
+{
+  "data": [
+    {
+      "id": "...",
+      "metric": "spotify_streams",
+      "threshold": 5000000000,
+      "crossedAt": "2026-05-01",
+      "isAfrobeats": true,
+      "streamValue": 5100000000,
+      "artistName": "Tems",
+      "artistSlug": "tems",
+      "artistImageUrl": "https://...",
+      "songId": null,
+      "songTitle": null
+    }
+  ],
+  "meta": {
+    "total": 90000,
+    "page": 1,
+    "limit": 10,
+    "totalPages": 9000
+  }
+}
+```
+
+## Poll for new milestones
+
+```javascript
+const BASE = "https://api.tooxclusive.com/api";
+const KEY = "txc_live_YOUR_KEY";
+const headers = { Authorization: `Bearer ${KEY}` };
+
+let lastSeenId = null;
+
+async function checkNewMilestones() {
+  const { data } = await fetch(
+    `${BASE}/v1/milestones/recent?isAfrobeats=true&limit=20`,
+    { headers },
+  ).then((r) => r.json());
+
+  const newMilestones = lastSeenId
+    ? data.filter((m) => m.id !== lastSeenId)
+    : data;
+
+  if (newMilestones.length > 0) {
+    lastSeenId = data[0].id;
+    newMilestones.forEach(notify);
+  }
+}
+
+function notify(milestone) {
+  const who = milestone.songTitle
+    ? `${milestone.songTitle} by ${milestone.artistName}`
+    : milestone.artistName;
+
+  const streams = (milestone.threshold / 1_000_000_000).toFixed(1);
+  console.log(`${who} just hit ${streams}B streams on Spotify`);
+}
+
+// Poll every hour
+setInterval(checkNewMilestones, 60 * 60 * 1000);
+checkNewMilestones();
+```
+
+## Get an artist milestone timeline
+
+```javascript
+const milestones = await fetch(`${BASE}/v1/milestones/timeline/burna-boy`, {
+  headers,
+}).then((r) => r.json());
+
+milestones.forEach((m) => {
+  const streams = (m.threshold / 1_000_000_000).toFixed(1);
+  console.log(`${streams}B streams crossed on ${m.crossedAt}`);
+});
+```
+
+## Milestone tiers
+
+**Artist stream tiers:** 100m, 500m, 1b, 2b, 5b, 10b, 15b, 20b
+
+**Song stream tiers:** 50m, 100m, 500m, 1b, 2b
+
+```bash
+# All artists with 1B+ streams
+curl "https://api.tooxclusive.com/api/v1/milestones/artists/1b" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+
+# All songs with 500M+ streams
+curl "https://api.tooxclusive.com/api/v1/milestones/songs/500m" \
+  -H "Authorization: Bearer txc_live_YOUR_KEY"
+```

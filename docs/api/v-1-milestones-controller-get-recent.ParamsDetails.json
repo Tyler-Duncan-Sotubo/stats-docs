@@ -1,0 +1,1 @@
+{"parameters":[{"name":"isAfrobeats","required":false,"in":"query","schema":{"type":"boolean"}},{"name":"page","required":false,"in":"query","schema":{"type":"number"}},{"name":"limit","required":false,"in":"query","schema":{"type":"number"}}]}

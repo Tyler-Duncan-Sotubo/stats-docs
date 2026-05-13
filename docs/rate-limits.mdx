@@ -1,0 +1,31 @@
+# Rate Limits
+
+## Free tier
+
+| Limit            | Value            |
+| ---------------- | ---------------- |
+| Requests per day | 1,000            |
+| Resets           | Midnight UTC     |
+| Endpoints        | All V1 endpoints |
+
+## Rate limit headers
+
+When you exceed your limit you'll receive a `429` response:
+
+```json
+{
+  "statusCode": 429,
+  "error": "Too Many Requests",
+  "message": "Daily limit of 1000 requests reached. Resets at midnight UTC."
+}
+```
+
+## Need more?
+
+Higher limits are available. Contact api@tooxclusive.com with your use case.
+
+## Tips for staying within limits
+
+- Cache responses on your end — artist and song data updates once daily
+- Use the `limit` query parameter to fetch only what you need
+- Batch artist lookups using the browse endpoint with `search` rather than individual slug lookups
