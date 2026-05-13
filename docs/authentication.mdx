@@ -1,11 +1,16 @@
+---
+sidebar_position: 3
+sidebar_label: Authentication
+---
+
 # Authentication
 
 All API requests require an API key passed as a Bearer token in the `Authorization` header.
 
 ## Getting a key
 
-Request your free API key at [developers.tooxclusive.com/docs/get-api-key](/docs/get-api-key).  
-Your key will be emailed to you instantly.
+Request your free API key at [developers.tooxclusive.com/get-api-key](/get-api-key).
+Your key will be shown on screen instantly — copy it and store it somewhere safe.
 
 ## Making requests
 
@@ -30,3 +35,13 @@ Use the query parameter method for testing only.
 ## Key format
 
 All API keys follow this format:
+
+```
+txc_live_<64 hex characters>
+```
+
+## Security
+
+- Keys are hashed with SHA-256 — we never store your raw key
+- Your key is shown once at generation — store it immediately
+- If your key is compromised, contact api@tooxclusive.com immediately
