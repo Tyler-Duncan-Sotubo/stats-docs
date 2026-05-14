@@ -1,32 +1,40 @@
-/* src/css/custom.css */
 :root {
-  --ifm-color-primary: #f97316;
-  --ifm-color-primary-dark: #ea6c0a;
-  --ifm-color-primary-darker: #dd650a;
-  --ifm-color-primary-darkest: #b75308;
-  --ifm-color-primary-light: #fa8234;
-  --ifm-color-primary-lighter: #fa8b3f;
-  --ifm-color-primary-lightest: #fba567;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  /* Primary — matches stats platform orange-red */
+  --ifm-color-primary: oklch(0.55 0.19 25);
+  --ifm-color-primary-dark: oklch(0.5 0.19 25);
+  --ifm-color-primary-darker: oklch(0.47 0.19 25);
+  --ifm-color-primary-darkest: oklch(0.42 0.19 25);
+  --ifm-color-primary-light: oklch(0.6 0.19 25);
+  --ifm-color-primary-lighter: oklch(0.63 0.19 25);
+  --ifm-color-primary-lightest: oklch(0.68 0.19 25);
+
+  --ifm-background-color: oklch(1 0 0);
+  --ifm-background-surface-color: oklch(1 0 0);
+  --ifm-navbar-background-color: oklch(1 0 0);
+  --ifm-footer-background-color: oklch(0.96 0.004 240);
+  --ifm-color-content: oklch(0.12 0 0);
+  --ifm-color-content-secondary: oklch(0.5 0.01 240);
+  --ifm-border-color: oklch(0.91 0.005 240);
+  --ifm-code-background: oklch(0.96 0.004 240);
+  --docusaurus-highlighted-code-line-bg: oklch(0.93 0.005 240);
 }
 
 [data-theme="dark"] {
-  --ifm-color-primary: #f97316;
-  --ifm-color-primary-dark: #ea6c0a;
-  --ifm-color-primary-darker: #dd650a;
-  --ifm-color-primary-darkest: #b75308;
-  --ifm-color-primary-light: #fa8234;
-  --ifm-color-primary-lighter: #fa8b3f;
-  --ifm-color-primary-lightest: #fba567;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-}
+  --ifm-color-primary: oklch(0.55 0.19 25);
+  --ifm-color-primary-dark: oklch(0.5 0.19 25);
+  --ifm-color-primary-darker: oklch(0.47 0.19 25);
+  --ifm-color-primary-darkest: oklch(0.42 0.19 25);
+  --ifm-color-primary-light: oklch(0.6 0.19 25);
+  --ifm-color-primary-lighter: oklch(0.63 0.19 25);
+  --ifm-color-primary-lightest: oklch(0.68 0.19 25);
 
-/* API key form */
-.api-key-form {
-  background: var(--ifm-card-background-color);
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 8px;
-  padding: 24px;
-  margin: 24px 0;
+  --ifm-background-color: oklch(0.11 0.01 240);
+  --ifm-background-surface-color: oklch(0.15 0.01 240);
+  --ifm-navbar-background-color: oklch(0.13 0.01 240);
+  --ifm-footer-background-color: oklch(0.09 0.01 240);
+  --ifm-color-content: oklch(0.95 0 0);
+  --ifm-color-content-secondary: oklch(0.6 0.01 240);
+  --ifm-border-color: oklch(1 0 0 / 8%);
+  --ifm-code-background: oklch(0.2 0.01 240);
+  --docusaurus-highlighted-code-line-bg: oklch(0.22 0.01 240);
 }

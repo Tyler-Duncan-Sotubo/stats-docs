@@ -1,9 +1,13 @@
 /* ── Hero ─────────────────────────────────────────────────────────────── */
 .hero {
-  background: linear-gradient(135deg, #fff7f0 0%, #fff 100%);
+  background: linear-gradient(
+    135deg,
+    oklch(0.98 0.01 25) 0%,
+    var(--ifm-background-color) 100%
+  );
   padding: 96px 24px 80px;
   text-align: center;
-  border-bottom: 1px solid #f0e8e0;
+  border-bottom: 1px solid var(--ifm-border-color);
 }
 
 .heroInner {
@@ -15,7 +19,7 @@
   display: inline-block;
   background: rgba(249, 115, 22, 0.1);
   border: 1px solid rgba(249, 115, 22, 0.25);
-  color: #f97316;
+  color: var(--ifm-color-primary);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -28,14 +32,14 @@
   font-size: clamp(40px, 6vw, 72px);
   font-weight: 800;
   line-height: 1.1;
-  color: #111;
+  color: var(--ifm-color-content);
   margin-bottom: 20px;
   letter-spacing: -0.02em;
 }
 
 .heroSubtitle {
   font-size: 18px;
-  color: #555;
+  color: var(--ifm-color-content-secondary);
   line-height: 1.6;
   margin-bottom: 40px;
   max-width: 560px;
@@ -54,7 +58,7 @@
 .primaryButton {
   display: inline-flex;
   align-items: center;
-  background: #f97316;
+  background: var(--ifm-color-primary);
   color: #fff !important;
   font-weight: 600;
   font-size: 15px;
@@ -65,33 +69,33 @@
 }
 
 .primaryButton:hover {
-  background: #ea6c0a;
+  background: var(--ifm-color-primary-dark);
 }
 
 .secondaryButton {
   display: inline-flex;
   align-items: center;
   background: transparent;
-  color: #111 !important;
+  color: var(--ifm-color-content) !important;
   font-weight: 600;
   font-size: 15px;
   padding: 12px 28px;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--ifm-border-color);
   text-decoration: none !important;
   transition: border-color 0.2s;
 }
 
 .secondaryButton:hover {
-  border-color: #aaa;
+  border-color: var(--ifm-color-content-secondary);
 }
 
 .demoKey {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: #fafafa;
-  border: 1px solid #eee;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-border-color);
   border-radius: 8px;
   padding: 10px 16px;
   margin-top: 8px;
@@ -99,21 +103,21 @@
 
 .demoKeyLabel {
   font-size: 12px;
-  color: #999;
+  color: var(--ifm-color-content-secondary);
   font-weight: 500;
   white-space: nowrap;
 }
 
 .demoKeyValue {
   font-size: 12px;
-  color: #f97316;
+  color: var(--ifm-color-primary);
   word-break: break-all;
 }
 
 /* ── Stats ────────────────────────────────────────────────────────────── */
 .stats {
-  background: #fff;
-  border-bottom: 1px solid #f0e8e0;
+  background: var(--ifm-background-surface-color);
+  border-bottom: 1px solid var(--ifm-border-color);
   padding: 48px 24px;
 }
 
@@ -139,14 +143,14 @@
 .statValue {
   font-size: 36px;
   font-weight: 800;
-  color: #f97316;
+  color: var(--ifm-color-primary);
   line-height: 1;
   margin-bottom: 8px;
 }
 
 .statLabel {
   font-size: 14px;
-  color: #888;
+  color: var(--ifm-color-content-secondary);
   font-weight: 500;
 }
 
@@ -159,22 +163,22 @@
 .sectionTitle {
   font-size: 32px;
   font-weight: 800;
-  color: #111;
+  color: var(--ifm-color-content);
   margin-bottom: 12px;
   letter-spacing: -0.01em;
 }
 
 .sectionSubtitle {
   font-size: 16px;
-  color: #888;
+  color: var(--ifm-color-content-secondary);
   margin-bottom: 40px;
 }
 
 /* ── Endpoints ────────────────────────────────────────────────────────── */
 .endpoints {
-  background: #fafafa;
+  background: var(--ifm-background-color);
   padding: 80px 24px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--ifm-border-color);
 }
 
 .endpointList {
@@ -185,8 +189,8 @@
 }
 
 .endpoint {
-  background: #fff;
-  border: 1px solid #eee;
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-border-color);
   border-radius: 8px;
   padding: 16px 20px;
   display: flex;
@@ -198,7 +202,7 @@
 }
 
 .endpoint:hover {
-  border-color: #f97316;
+  border-color: var(--ifm-color-primary);
 }
 
 .endpointLeft {
@@ -210,7 +214,7 @@
 .method {
   font-size: 11px;
   font-weight: 700;
-  color: #f97316;
+  color: var(--ifm-color-primary);
   background: rgba(249, 115, 22, 0.08);
   border: 1px solid rgba(249, 115, 22, 0.2);
   padding: 3px 8px;
@@ -221,13 +225,13 @@
 
 .path {
   font-size: 13px;
-  color: #333;
+  color: var(--ifm-color-content);
   font-family: monospace;
 }
 
 .endpointDesc {
   font-size: 13px;
-  color: #888;
+  color: var(--ifm-color-content-secondary);
   margin: 0;
   text-align: right;
 }
@@ -238,9 +242,9 @@
 
 /* ── Features ─────────────────────────────────────────────────────────── */
 .features {
-  background: #fff;
+  background: var(--ifm-background-surface-color);
   padding: 80px 24px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--ifm-border-color);
 }
 
 .featureGrid {
@@ -262,15 +266,15 @@
 }
 
 .feature {
-  background: #fafafa;
-  border: 1px solid #eee;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-border-color);
   border-radius: 12px;
   padding: 24px;
   transition: border-color 0.2s;
 }
 
 .feature:hover {
-  border-color: #f97316;
+  border-color: var(--ifm-color-primary);
 }
 
 .featureIcon {
@@ -281,35 +285,39 @@
 .featureTitle {
   font-size: 16px;
   font-weight: 700;
-  color: #111;
+  color: var(--ifm-color-content);
   margin-bottom: 8px;
 }
 
 .featureDesc {
   font-size: 14px;
-  color: #666;
+  color: var(--ifm-color-content-secondary);
   line-height: 1.6;
   margin: 0;
 }
 
 /* ── CTA ──────────────────────────────────────────────────────────────── */
 .cta {
-  background: linear-gradient(135deg, #fff7f0 0%, #fff 100%);
+  background: linear-gradient(
+    135deg,
+    oklch(0.98 0.01 25) 0%,
+    var(--ifm-background-color) 100%
+  );
   padding: 96px 24px;
   text-align: center;
-  border-top: 1px solid #f0e8e0;
+  border-top: 1px solid var(--ifm-border-color);
 }
 
 .ctaTitle {
   font-size: 40px;
   font-weight: 800;
-  color: #111;
+  color: var(--ifm-color-content);
   margin-bottom: 16px;
   letter-spacing: -0.02em;
 }
 
 .ctaSubtitle {
   font-size: 16px;
-  color: #666;
+  color: var(--ifm-color-content-secondary);
   margin-bottom: 40px;
 }
